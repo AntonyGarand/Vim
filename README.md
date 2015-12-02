@@ -1,6 +1,6 @@
 # My vim folder for Windows
 
-My own vimrc for windows.  
+My personnal vim for windows.  
 This vim is 64 bit and requires 64 bit tools.(ex: python)
 
 ## Plugins
@@ -40,7 +40,7 @@ vdebug: Debugging with Vim. I use it with xDebug but is compatible with most deb
 the vimrc is pretty much always commented, here are few keys not to forget:  
 
 jj in insert mode will get back to normal mode  
-
+  
 Leader key: Space  
 Leader + v: Select previously pasted text  
 Leader + w: Open a new vertica split window [ | ]  
@@ -54,8 +54,11 @@ F5: Open vDebug, wait connection
 Ctrl + T: Open a new tab  
 Alt + [1-0]: To to tab  
 
+Marks: 
+' and \` are swapped. Use ' to find a line and collumn, use \` to find a line only.
+
 ###[EasyMotion]  
-s: S + 2 characters will search for the next occurences of these 2 chars. You can then press the appropriate key to go to these chars.  
+s: S + 1 character will search for the next occurences of the char. You can then press the appropriate key to go to this char.  
 Leader + j: Highlight first letters of line under, easily swap to other line  
 Leader + k: Same as previous but up  
 Leader, Leader + w: Look forward words  

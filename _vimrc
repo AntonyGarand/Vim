@@ -7,11 +7,6 @@ command! -nargs=1 Silent
 " have made, as well as sanely reset options when re-sourcing .vimrc
 set nocompatible
  
-" Attempt to determine the type of a file based on its name and possibly its
-" contents. Use this to allow intelligent auto-indenting for each filetype,
-" and for plugins that are filetype specific.
-filetype indent plugin on
- 
 "------------------------------------------------------------
 " Must have options {{{1
 "
@@ -112,6 +107,9 @@ set mouse=a
 " Display line numbers on the left
 set number
  
+" Make the number relative to the current position
+set relativenumber
+ 
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
  
@@ -152,13 +150,6 @@ nnoremap <C-L> :nohl<CR><C-L>
 " Enable syntax highlighting
 syntax on
  
-" Set the command window height to 2 lines, to avoid many cases of having to
-" "press <Enter> to continue"
-set cmdheight=2
-
-" Make the number relative to the current position
-set relativenumber
- 
 " Use space as leader 
 let mapleader = " "
 
@@ -188,6 +179,10 @@ nnoremap k gk
 " Make ; act as :, one less key to execute commands!
 nnoremap ; :
 
+" Marks: Swap ` and ', to use ' to go to the right collumn.
+nnoremap ` '
+nnoremap ' `
+
 " Leader + v will select the previously pasted text
 nnoremap <leader>v V`]
 
@@ -196,8 +191,6 @@ inoremap jj <ESC>
 
 " Open a new window with Leader + w
 nnoremap <Leader>w <C-w>v<C-w>l
-
-"------------------------------------------------------------
 
 " shift+arrow selection
 nmap <S-Up> v<Up>
@@ -232,7 +225,7 @@ filetype plugin indent on
 "F2 to toggle NERDTree
 "F3 to preview
 silent! nmap <F2> :NERDTreeToggle<CR>
-let g:NERDTreeMapPreview="<F3>"
+let g:NERDTreeMapPreview="<F10>"
 
 "OLD NERDTree map: f2 goto, f3 preview
 "silent! map <F2> :NERDTreeFind<CR>
@@ -250,14 +243,12 @@ let g:syntastic_check_on_wq = 0
 
 "EasyMotion mapping
 let g:EasyMotion_do_mapping = 1 " Disable default mappings
-" Bi-directional find motion
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-s)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
+
+" use s + two characters to highlight and search them.
 nmap s <Plug>(easymotion-s2)
+
+" Or same mapping using 1 character only
+" nmap s <Plug>(easymotion-s)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -265,7 +256,6 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
-
 
 " Ctrl + S to save
 " If the current buffer has never been saved, it will have no name,
@@ -280,9 +270,10 @@ command -nargs=0 -bar Update if &modified
 
 nnoremap <silent> <C-S> :<C-u>Update<CR>
 
-"Tabs navigating like in a browser
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-t>     <Esc>:tabnew<CR>
+"Tabs navigating using Alt! 
+" I do not use Ctrl as it is already mapped by cmder's tabs. 
+nnoremap <A-t>     :tabnew<CR>
+inoremap <A-t>     <Esc>:tabnew<CR>
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
 nnoremap <A-3> 3gt
@@ -305,7 +296,7 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 
 "Tagbar mapping
-nmap <F2> :TagbarToggle<CR>
+nmap <F3> :TagbarToggle<CR>
 
 " Switch windows with F4
 :map <F4> <C-W>w
@@ -316,7 +307,7 @@ colorscheme pablo
 "Path to vim
 :let $VIMRUNTIME = "D:/Programmes/Vim/vim74"
 
-"XDebug
+"VDebug
 let g:vdebug_options = {}
 let g:vdebug_options["port"] = 9001
 
